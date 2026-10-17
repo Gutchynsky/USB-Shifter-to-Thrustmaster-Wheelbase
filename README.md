@@ -51,14 +51,19 @@ These notes come from a second build of the **USB Shield** method. It used a **h
 
 ### What the finished setup looks like
 ```mermaid
-flowchart LR
-    S["USB shifter<br/>(DragonRise 0079:0006)"] -->|USB| H["USB Host Shield Mini<br/>(MAX3421E)"]
+flowchart TB
+    S["USB shifter<br/>DragonRise 0079:0006"] -->|USB| H["USB Host Shield Mini<br/>MAX3421E"]
     H -->|SPI| P["Pro Mini 3.3V / 8 MHz"]
-    P -->|"I2C over PS/2<br/>SDA = A4, SCL = A5"| B["T300 base<br/>(mode switch: PS4)"]
-    B -->|"3.3V (pin 5) + GND"| P
+    P <-->|"PS/2 cable<br/>I2C: SDA A4, SCL A5<br/>power: 3.3V pin 5, GND"| B["T300 base<br/>mode switch: PS4"]
     B -->|USB| C["PS4 / PS5"]
 ```
 The wheelbase is the **only** power source. The shield passes its 3.3V on to the shifter's USB port.
+
+| Pro Mini stacked on the USB Host Shield Mini | The finished adapter with its PS/2 cable |
+|---|---|
+| ![Finished build close-up](Images/Finished%20build%20close-up.jpg) | ![Finished build with PS2 cable](Images/Finished%20build%20with%20PS2%20cable.jpg) |
+
+In the close-up, the yellow 3.3V wire runs down to the **shield's** VCC pin instead of the Pro Mini's RAW pin (see [Power problems](#power-problems)).
 
 ### Quick reference: the changes in this version of the sketch
 | Change in [USBShifter2PS2.ino](USBShifter2PS2/USBShifter2PS2.ino) | Why |
